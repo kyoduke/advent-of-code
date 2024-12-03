@@ -6,8 +6,21 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Part01 {
-    public static void main(String[] args) {
+
+    public static int calculateRows(ArrayList<Integer> arrOne, ArrayList<Integer> arrTwo) {
         int result = 0;
+        for (int i = 0; i < arrOne.size(); i++) {
+            int firstColumnValue = arrOne.get(i);
+            int secondColumnValue = arrTwo.get(i);
+            if (firstColumnValue > secondColumnValue) {
+                result += (firstColumnValue - secondColumnValue);
+            } else {
+                result += (secondColumnValue - firstColumnValue);
+            }
+        }
+        return result;
+    }
+    public static void main(String[] args) {
         try {
             File file = new File("src/main/resources/day01/input.txt");
             Scanner scanner = new Scanner(file);
@@ -25,16 +38,8 @@ public class Part01 {
             Collections.sort(firstColumn);
             Collections.sort(secondColumn);
 
-            for (int i = 0; i < firstColumn.size(); i++) {
-                int firstColumnValue = firstColumn.get(i);
-                int secondColumnValue = secondColumn.get(i);
-                if (firstColumnValue > secondColumnValue) {
-                    result += (firstColumnValue - secondColumnValue);
-                } else {
-                    result += (secondColumnValue - firstColumnValue);
-                }
-            }
-            System.out.println(result); // 2166959
+            int result = calculateRows(firstColumn, secondColumn);
+            System.out.println(result);
 
 
         } catch (FileNotFoundException e) {
